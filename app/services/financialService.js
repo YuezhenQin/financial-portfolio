@@ -6,8 +6,12 @@ const getAllStockInfo = async () => {
 };
 
 const getStockNames = async () => {
-    const[rows] = await connection.query('SELECT DISTINCT stockName FROM stockinfo');
-    return rows;
+    const[rows] = await connection.query('SELECT stockName FROM stockinfo GROUP BY stockname;');
+    const res = rows.map((rows) => {
+        return rows['stockName'];
+    })
+    const res1 = {'stockList': res};
+    return res1;
 };
 
 const getStartDatePriceByName = async (stockName) => {
