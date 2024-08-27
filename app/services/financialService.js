@@ -15,4 +15,14 @@ const getStartDatePriceByName = async (stockName) => {
     return rows[0];
 }
 
-export {getAllStockInfo, getStockNames, getStartDatePriceByName}
+const getStockPriceByNameAndDate = async (stockName, startDate, endDate) => {
+    const[rows] = await connection.query(
+        'SELECT stockName, (SELECT closePrice FROM stockinfo WHERE stockName = ? AND infoDate = ?) startDatePrice, ' +
+        '(SELECT closePrice FROM stockinfo WHERE stockName = ? AND infoDate = ?) endDatePrice ' +
+        'FROM stockinfo ' +
+        'WHERE stockName = ?;',
+        [stockName, startDate, stockName, endDate, stockName]);
+        return rows[0];
+}
+
+export {getAllStockInfo, getStockNames, getStartDatePriceByName, getStockPriceByNameAndDate}
