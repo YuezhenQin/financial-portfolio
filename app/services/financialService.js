@@ -6,7 +6,7 @@ const getAllStockInfo = async () => {
 };
 
 const getStockNames = async () => {
-    const[rows] = await connection.query('SELECT stockName FROM stockinfo');
+    const[rows] = await connection.query('SELECT DISTINCT stockName FROM stockinfo');
     return rows;
 };
 
