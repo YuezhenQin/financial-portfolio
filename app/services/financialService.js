@@ -10,9 +10,9 @@ const getStockNames = async () => {
     return rows;
 };
 
-// const getStartDatePriceByName = async() => {
-//     const[rows] = await connnection.query();
-    
-// }
+const getStartDatePriceByName = async (stockName) => {
+    const[rows] = await connection.query('SELECT purchasePrice FROM userstock WHERE stockName = ?;', [stockName]);
+    return rows[0];
+}
 
-export {getAllStockInfo, getStockNames}
+export {getAllStockInfo, getStockNames, getStartDatePriceByName}
