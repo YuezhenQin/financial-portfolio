@@ -8,3 +8,12 @@ export const getAllStockInfo = async (req, res) => {
         res.status(500).send(error.message)
     }
 };
+
+export const getStockNames = async (req, res) => {
+    try{
+        const stockNames = await financialService.getStockNames();
+        res.json(stockNames);
+    } catch(error){
+        res.status(500).send(error.message)
+    }
+};

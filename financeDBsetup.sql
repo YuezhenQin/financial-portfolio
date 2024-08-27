@@ -38,6 +38,9 @@ CREATE TABLE userStock (
     stockName  VARCHAR(100) NOT NULL UNIQUE,
     userName VARCHAR(100) NOT NULL UNIQUE,
 	shares FlOAT,
+    purchasePrice FLOAT,
+    purchaseDate DATE,
+    curStatus INT DEFAULT 1,
     CONSTRAINT fk_stock_name FOREIGN KEY(stockName) REFERENCES StockInfo(stockName),
     CONSTRAINT fk_user_name FOREIGN KEY(userName) REFERENCES user(name)
 );
@@ -58,7 +61,25 @@ VALUES
 ('ZiHui', '18', '6', '500000');
 
 INSERT INTO `finance_db`.`userStock` 
-(`stockName`, `userName`, `shares`)
+(`stockName`, `userName`, `shares`, 'purchasePrice', 'purchaseDate','curStatus')
 VALUES 
-('AAPL', 'David', '3'),
-('ABNB', 'Jack', '10');
+('AAPL', 'David', '3', '100', '2024-08-27','1'),
+('ABNB', 'Jack', '10', '100', '2024-08-27','1');
+
+-- allow update without where statement
+SET SQL_SAFE_UPDATES = 0;
+
+-- update purchase date to random date between 2024-7-1 and 2024-8-23
+update userstock
+set purchaseDate = CURRENT_DATE - INTERVAL FLOOR(RAND() * 54) DAY;
+
+-- update purchase price to the closing price of the purchase date
+UPDATE userstock
+JOIN stockinfo ON userstock.purchaseDate = stockinfo.infoDate
+SET userstock.purchasePrice = stockinfo.closePrice;
+
+-- test
+select purchasePrice from userstock;
+select purchaseDate from userstock;
+
+

@@ -5,4 +5,14 @@ const getAllStockInfo = async () => {
     return rows;
 };
 
-export {getAllStockInfo}
+const getStockNames = async () => {
+    const[rows] = await connection.query('SELECT stockName FROM stockinfo');
+    return rows;
+};
+
+// const getStartDatePriceByName = async() => {
+//     const[rows] = await connnection.query();
+    
+// }
+
+export {getAllStockInfo, getStockNames}
