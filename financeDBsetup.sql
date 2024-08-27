@@ -1,3 +1,5 @@
+DROP DATABASE finance_db;
+
 -- Create the database
 CREATE DATABASE finance_db;
 

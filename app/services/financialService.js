@@ -17,11 +17,13 @@ const getStartDatePriceByName = async (stockName) => {
 
 const getStockPriceByNameAndDate = async (stockName, startDate, endDate) => {
     const[rows] = await connection.query(
-        'SELECT stockName, (SELECT closePrice FROM stockinfo WHERE stockName = ? AND infoDate = ?) startDatePrice, ' +
-        '(SELECT closePrice FROM stockinfo WHERE stockName = ? AND infoDate = ?) endDatePrice ' +
-        'FROM stockinfo ' +
-        'WHERE stockName = ?;',
-        [stockName, startDate, stockName, endDate, stockName]);
+        'SELECT DISTINCT stockName, ' +
+        'MIN(CASE WHEN infoDate = ? THEN ROUND(closePrice, 2) END) AS startDate, ' +
+        'MIN(CASE WHEN infoDate = ? THEN ROUND(closePrice, 2) END) AS endDate ' +
+        'FROM stockinfo ' + 
+        'WHERE stockName = ? ' +
+        'GROUP BY stockName;',
+        [startDate, endDate, stockName]);
         return rows[0];
 }
 
