@@ -5,4 +5,5 @@ const router = express.Router();
 
 router.get('/', cryptocoinController.getCryptocoinInfo);
 router.get('/cryptoName', cryptocoinController.getPriceByName);
+
 export default router;

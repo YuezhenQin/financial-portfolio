@@ -31,4 +31,14 @@ const getStockPriceByNameAndDate = async (stockName, startDate, endDate) => {
         return rows[0];
 }
 
-export {getAllStockInfo, getStockNames, getStartDatePriceByName, getStockPriceByNameAndDate}
+const updateUserStockSharesByName = async (stockName, shares) => {
+    const[result] = await connection.query(
+        'UPDATE userstock ' +
+        'SET shares = shares + ? ' +
+        'WHERE stockName = ?;',
+        [shares, stockName]
+    );
+    return result.affectedRows > 0;
+}
+
+export {getAllStockInfo, getStockNames, getStartDatePriceByName, getStockPriceByNameAndDate, updateUserStockSharesByName}

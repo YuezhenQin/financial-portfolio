@@ -7,46 +7,6 @@ router.get('/', financialController.getAllStockInfo);
 router.get('/stockList', financialController.getStockNames);
 router.get('/stockName', financialController.getStartDatePriceByName);
 router.get('/stock', financialController.getStockPriceByNameAndDate);
-router.put('/delete',financialController.getStockPriceByNameAndDate);
-
+router.get('updateShares', financialController.updateUserStockSharesByName);
 
 export default router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-console.log("Testing")
