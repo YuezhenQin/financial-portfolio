@@ -45,15 +45,37 @@ export const getStockPriceByNameAndDate = async (req, res) => {
     }
 };
 
-export const updateUserStockSharesByName = async (req, res) => {
+export const getUserStockByUserName = async (req, res) => {
     try{
-        const updateSharesRes = await financialService.updateUserStockSharesByName(req.query.stockName, req.query.shares);
-        if(updateSharesRes){
-            res.status(204).send('Shares updated Successfully')
+        const userStock = await financialService.getUserStockByUserName(req.query.userName);
+        if(userStock){
+            res.json(userStock);
         } else{
             res.status(404).send('Stock not found');
         }
     } catch(error){
         res.status(500).send(error.message);
+    }  
+};
+
+export const updateUserStockSharesByName = async (req, res) => {
+    try{
+        const updateSharesRes = await financialService.updateUserStockSharesByName(req.query.stockName, req.query.userName, req.query.shares);
+        if(updateSharesRes){
+            res.status(201).send('Shares updated Successfully')
+        } else{
+            res.status(404).send('Stock not found or user not found. Please check your input!');
+        }
+    } catch(error){
+        res.status(500).send(error.message);
     }
+};
+
+export const insertUserStock = async (req, res) => {
+    try{
+        const userStock = await financialService.insertUserStock(req.body);
+        res.status(201).json(userStock);
+    } catch(error){
+        res.status(500).send(error.message);
+    }  
 };

@@ -7,6 +7,8 @@ router.get('/', financialController.getAllStockInfo);
 router.get('/stockList', financialController.getStockNames);
 router.get('/stockName', financialController.getStartDatePriceByName);
 router.get('/stock', financialController.getStockPriceByNameAndDate);
-router.get('updateShares', financialController.updateUserStockSharesByName);
+router.get('/userStock', financialController.getUserStockByUserName);
+router.put('/userStock', financialController.updateUserStockSharesByName);
+router.post('/userStock', financialController.insertUserStock);
 
 export default router;
