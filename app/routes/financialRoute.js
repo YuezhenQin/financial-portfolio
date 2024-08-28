@@ -7,5 +7,7 @@ router.get('/', financialController.getAllStockInfo);
 router.get('/stockList', financialController.getStockNames);
 router.get('/stockName', financialController.getStartDatePriceByName);
 router.get('/stock', financialController.getStockPriceByNameAndDate);
+router.put('/delete',financialController.getStockPriceByNameAndDate);
+
 
 export default router;
