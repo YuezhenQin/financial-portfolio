@@ -60,3 +60,18 @@ export const insertUserStock = async (userStockData) => {
     return {id: result.insertId, ...userStockData, purchaseDate: new Date().toISOString().slice(0, 10), status: 1}
 }
 
+export const getStocksByUser = async (userName) => {
+    const [rows] = await connection.query(
+        'select '+
+        'userstock.userName, '+
+        'userstock.stockName, '+
+        'userstock.shares, '+
+        'stockinfo.currentPrice, '+
+        'truncate(((stockinfo.currentPrice - userstock.purchaseprice)/userstock.purchaseprice),4) as percentChange, '+
+        'truncate((stockinfo.currentPrice * userstock.shares),4) as value, '+
+        'userstock.purchasedate '+
+        'from  userStock '+
+        'join  stockInfo on userStock.purchaseDate = stockInfo.infoDate and userstock.stockName = stockinfo.stockName ' +
+        'where userName = ?;', [userName]);
+    return rows;
+}

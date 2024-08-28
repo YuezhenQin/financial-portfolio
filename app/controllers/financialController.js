@@ -79,3 +79,18 @@ export const insertUserStock = async (req, res) => {
         res.status(500).send(error.message);
     }  
 };
+
+
+
+export const getStocksByUser = async (req, res) => {
+    try{
+        const userStockList = await financialService.getStocksByUser(req.query.userName);
+        if(userStockList){
+            res.json(userStockList);
+        } else{
+            res.status(404).send('User not found');
+        }
+    } catch(error){
+        res.status(500).send(error.message);
+    }  
+};
