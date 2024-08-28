@@ -11,3 +11,42 @@ router.put('/delete',financialController.getStockPriceByNameAndDate);
 
 
 export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log("Testing")
