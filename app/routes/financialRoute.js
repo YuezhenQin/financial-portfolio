@@ -9,3 +9,42 @@ router.get('/stockName', financialController.getStartDatePriceByName);
 router.get('/stock', financialController.getStockPriceByNameAndDate);
 
 export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log("Testing")
