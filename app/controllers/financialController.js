@@ -31,6 +31,20 @@ export const getStartDatePriceByName = async (req, res) => {
     }
 };
 
+
+export const getHistoryPriceByName = async (req, res) => {
+    try{
+        const historyPrice = await financialService.getHistoryPriceByName(req.query.stockName);
+        if(historyPrice){
+            res.json(historyPrice);
+        } else{
+            res.status(404).send('Stock not found');
+        }
+    } catch(error){
+        res.status(500).send(error.message);
+    }
+};
+
 export const getStockPriceByNameAndDate = async (req, res) => {
     try{
         console.log(req.params.stockName, req.params.startDate, req.params.endDate);
@@ -90,6 +104,37 @@ export const getStocksByUser = async (req, res) => {
         } else{
             res.status(404).send('User not found');
         }
+    } catch(error){
+        res.status(500).send(error.message);
+    }  
+};
+
+
+
+export const getUserTotalGain = async (req, res) => {
+    try{
+        let gain=0;
+        const userStockList = await financialService.getStocksByUser(req.query.userName);
+        //console.log(userStockList)
+        for(let i =0; i<userStockList.length;i++){
+            gain += userStockList[i].value
+            // console.log('value of gain: '+i)
+            // console.log(gain)
+        }
+        const purchaseList = await financialService.getUserPurchaseValue(req.query.userName);
+        let purchaseValue =0;
+        //console.log(purchaseList)
+        for(let j =0; j<purchaseList.length; j++){
+            purchaseValue +=  purchaseList[j].puechaseValue 
+            // console.log('value of purchaseValue: '+j)
+            // console.log(purchaseValue)
+        }
+        let totalGain ={
+            userName: req.query.userName,
+            totalGain: (gain-purchaseValue).toFixed(2)
+        } 
+       res.json(totalGain);
+
     } catch(error){
         res.status(500).send(error.message);
     }  

@@ -19,6 +19,11 @@ export const getStartDatePriceByName = async (stockName) => {
     return rows[0];
 };
 
+export const getHistoryPriceByName = async (stockName) => {
+    const [rows] = await connection.query('SELECT * FROM stockInfo WHERE stockName = ?;', [stockName]);
+    return rows;
+};
+
 export const getStockPriceByNameAndDate = async (stockName, startDate, endDate) => {
     const[rows] = await connection.query(
         'SELECT DISTINCT stockName, ' +
@@ -58,7 +63,7 @@ export const insertUserStock = async (userStockData) => {
         [stockName, userName, shares, purchasePrice]
     );
     return {id: result.insertId, ...userStockData, purchaseDate: new Date().toISOString().slice(0, 10), status: 1}
-}
+};
 
 export const getStocksByUser = async (userName) => {
     const [rows] = await connection.query(
@@ -67,11 +72,17 @@ export const getStocksByUser = async (userName) => {
         'userstock.stockName, '+
         'userstock.shares, '+
         'stockinfo.currentPrice, '+
-        'truncate(((stockinfo.currentPrice - userstock.purchaseprice)/userstock.purchaseprice),4) as percentChange, '+
+        'truncate(((stockinfo.currentPrice - userstock.purchaseprice)/userstock.purchaseprice)*100,4) as percentChange, '+
         'truncate((stockinfo.currentPrice * userstock.shares),4) as value, '+
         'userstock.purchasedate '+
         'from  userStock '+
         'join  stockInfo on userStock.purchaseDate = stockInfo.infoDate and userstock.stockName = stockinfo.stockName ' +
         'where userName = ?;', [userName]);
     return rows;
-}
+};
+
+
+export const getUserPurchaseValue = async (userName) => {
+    const [rows] = await connection.query('SELECT stockName, userName, purchasePrice, shares, truncate(shares*purchasePrice,2) as puechaseValue FROM finance_db.userstock where curStatus= 1 and userName = ? ', [userName]);
+    return rows;
+};

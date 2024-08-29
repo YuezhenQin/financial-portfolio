@@ -59,11 +59,9 @@ VALUES
 ('Q', '18', '5', '500000'),
 ('ZiHui', '18', '6', '500000');
 
-INSERT INTO `finance_db`.`userStock` 
-(`stockName`, `userName`, `shares`, `purchasePrice`, `purchaseDate`,`curStatus`)
-VALUES 
-('AAPL', 'David', '3', '100', '2024-08-27','1'),
-('ABNB', 'Jack', '10', '100', '2024-08-27','1');
+
+INSERT INTO `finance_db`.`userstock` VALUES (1,'AAPL','David',3,232.71,'2024-07-10',1),(2,'ABNB','Jack',10,558.62,'2024-07-17',1),(3,'ABNB','David',7,142.98,'2024-07-15',1),(4,'AMGN','David',1000,200.12,'2024-07-11',1);
+
 
 -- allow update without where statement
 SET SQL_SAFE_UPDATES = 0;
