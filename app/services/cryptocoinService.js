@@ -15,8 +15,6 @@ const getCryptocoinInfo = async () => {
 
 };
 
-
-
 const getPriceByName = async (cryptoName) => {
 const url = 'https://api.binance.com/api/v3/ticker/price?symbol='+cryptoName;
 console.log(url)

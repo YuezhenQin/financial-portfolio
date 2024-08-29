@@ -2,7 +2,7 @@ import * as cryptocoinService from '../services/cryptocoinService.js'
 
 export const getCryptocoinInfo = async (req, res) => {
     try{
-        const cryptos = await  cryptocoinService.getCryptocoinInfo();
+        const cryptos = await cryptocoinService.getCryptocoinInfo();
         res.json(cryptos);
 
     } catch(error){
