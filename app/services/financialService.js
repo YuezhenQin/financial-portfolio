@@ -56,11 +56,11 @@ export const updateUserStockSharesByName = async (stockName, userName, shares) =
 };
 
 export const insertUserStock = async (userStockData) => {
-    const {stockName, userName, shares, purchasePrice} = userStockData;
+    const {stockName, userName, shares, purchasePrice,purchaseDate} = userStockData;
     const[result] = await connection.query(
         'INSERT INTO userStock (stockName, userName, shares, purchasePrice, purchaseDate) ' +
-        'VALUES (?, ?, ?, ?, CURDATE());', 
-        [stockName, userName, shares, purchasePrice]
+        'VALUES (?, ?, ?, ?, ?);', 
+        [stockName, userName, shares, purchasePrice, purchaseDate]
     );
     return {id: result.insertId, ...userStockData, purchaseDate: new Date().toISOString().slice(0, 10), status: 1}
 };
