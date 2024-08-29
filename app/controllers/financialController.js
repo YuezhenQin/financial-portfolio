@@ -125,7 +125,7 @@ export const getUserTotalGain = async (req, res) => {
         let purchaseValue =0;
         //console.log(purchaseList)
         for(let j =0; j<purchaseList.length; j++){
-            purchaseValue +=  purchaseList[j].puechaseValue 
+            purchaseValue +=  purchaseList[j].purchaseValue 
             // console.log('value of purchaseValue: '+j)
             // console.log(purchaseValue)
         }

@@ -3,7 +3,7 @@ import request from 'supertest';
 import { jest } from '@jest/globals';
 
 jest.unstable_mockModule('../services/cryptocoinService.js', () => ({
-    getCryptoCoinInfo: jest.fn(),
+    getCryptocoinInfo: jest.fn(),
     getPriceByName: jest.fn()
 }));
 
@@ -29,7 +29,7 @@ describe('Crypto coin routes', () => {
     test('GET /crypto should return a object containing two values: The symbol of bitcoin and its price.', async () => {
         const randomCryptoName = 'crypto name'
         const mockCryptoCoinInfo = [{ symbol: randomCryptoName, price: 1.0 }];
-        cryptocoinService.getCryptoCoinInfo.mockResolvedValue(mockCryptoCoinInfo);
+        cryptocoinService.getCryptocoinInfo.mockResolvedValue(mockCryptoCoinInfo);
         const response = await request(app)
             .get('/crypto');
         expect(response.status).toBe(200);
