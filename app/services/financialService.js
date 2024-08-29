@@ -83,6 +83,6 @@ export const getStocksByUser = async (userName) => {
 
 
 export const getUserPurchaseValue = async (userName) => {
-    const [rows] = await connection.query('SELECT stockName, userName, purchasePrice, shares, truncate(shares*purchasePrice,2) as puechaseValue FROM finance_db.userstock where curStatus= 1 and userName = ? ', [userName]);
+    const [rows] = await connection.query('SELECT stockName, userName, purchasePrice, shares, truncate(shares*purchasePrice,2) as purchaseValue FROM finance_db.userstock where curStatus= 1 and userName = ? ', [userName]);
     return rows;
 };

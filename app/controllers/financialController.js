@@ -115,7 +115,7 @@ export const getUserTotalGain = async (req, res) => {
     try{
         let gain=0;
         const userStockList = await financialService.getStocksByUser(req.query.userName);
-        //console.log(userStockList)
+        // console.log(userStockList)
         for(let i =0; i<userStockList.length;i++){
             gain += userStockList[i].value
             // console.log('value of gain: '+i)
@@ -123,17 +123,39 @@ export const getUserTotalGain = async (req, res) => {
         }
         const purchaseList = await financialService.getUserPurchaseValue(req.query.userName);
         let purchaseValue =0;
-        //console.log(purchaseList)
+        console.log(purchaseList)
         for(let j =0; j<purchaseList.length; j++){
             purchaseValue +=  purchaseList[j].purchaseValue 
-            // console.log('value of purchaseValue: '+j)
-            // console.log(purchaseValue)
+            console.log('value of purchaseValue: '+j)
+            console.log(purchaseValue)
         }
         let totalGain ={
             userName: req.query.userName,
             totalGain: (gain-purchaseValue).toFixed(2)
         } 
        res.json(totalGain);
+
+    } catch(error){
+        res.status(500).send(error.message);
+    }  
+};
+
+
+export const getUserTotalValue = async (req, res) => {
+    try{
+        let gain=0;
+        const userStockList = await financialService.getStocksByUser(req.query.userName);
+        //console.log(userStockList)
+        for(let i =0; i<userStockList.length;i++){
+            gain += userStockList[i].value
+            // console.log('value of gain: '+i)
+            // console.log(gain)
+        }
+        let totalValue ={
+            userName: req.query.userName,
+            totalValue: gain.toFixed(2)
+        } 
+       res.json(totalValue);
 
     } catch(error){
         res.status(500).send(error.message);

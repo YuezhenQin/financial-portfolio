@@ -13,6 +13,8 @@ router.put('/userStock', financialController.updateUserStockSharesByName);
 router.post('/userStock', financialController.insertUserStock);
 router.get('/userStockGain', financialController.getStocksByUser);
 router.get('/userGain', financialController.getUserTotalGain);
+router.get('/userTotalValue', financialController.getUserTotalValue);
+
 
 
 
