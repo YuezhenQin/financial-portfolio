@@ -34,7 +34,6 @@ CREATE TABLE user (
     balance FLOAT
 );
 -- Insert sample data into the 'user-stock' table
-
 CREATE TABLE userStock (
     id INT AUTO_INCREMENT PRIMARY KEY,
     stockName  VARCHAR(100) NOT NULL,
@@ -60,15 +59,20 @@ VALUES
 ('ZiHui', '18', '6', '500000');
 
 
-INSERT INTO `finance_db`.`userstock` VALUES (1,'AAPL','David',3,232.71,'2024-07-10',1),(2,'ABNB','Jack',10,558.62,'2024-07-17',1),(3,'ABNB','David',7,142.98,'2024-07-15',1),(4,'AMGN','David',1000,200.12,'2024-07-11',1);
+INSERT INTO `finance_db`.`userstock` (`stockName`, `userName`, `shares`, `purchasePrice`,`purchaseDate`,`curStatus`) 
+VALUES ('AAPL','David',3,232.71,'2024-07-10',1),
+('ABNB','Jack',10,558.62,'2024-07-17',1),
+('ABNB','David',7,142.98,'2024-07-15',1),
+('AMGN','David',1000,200.12,'2024-08-12',1);
 
 
 -- allow update without where statement
 SET SQL_SAFE_UPDATES = 0;
 
 -- update purchase date to random date between 2024-7-1 and 2024-8-23
-update userstock
-set purchaseDate = CURRENT_DATE - INTERVAL FLOOR(RAND() * 54) DAY;
+-- update userstock
+-- -- set @END_DATE := '2024-08-23 01:01:01';
+-- set purchaseDate = current_date- INTERVAL 7 DAY - INTERVAL FLOOR(RAND() * 50) DAY;
 
 -- update purchase price to the closing price of the purchase date
 UPDATE userstock
