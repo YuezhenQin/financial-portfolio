@@ -20,7 +20,7 @@ export const getStockNames = async (req, res) => {
 
 export const getStartDatePriceByName = async (req, res) => {
     try{
-        const startDatePrice = await financialService.getStartDatePriceByName(req.query.stockName);
+        const startDatePrice = await financialService.getStartDatePriceByName(req.query.stockName, req.query.userName);
         if(startDatePrice){
             res.json(startDatePrice);
         } else{
