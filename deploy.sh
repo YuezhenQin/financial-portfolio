@@ -4,6 +4,8 @@ normal=$(tput sgr0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
 
+set Path = 
+
 if [ -d "financial-portfolio-backend" ]; then
 	echo '⚠️ Existing folder detected, deleting...';
   rm -rf financial-portfolio-backend
@@ -17,7 +19,7 @@ echo "📦 Cloning the repository from ${bold} $REPO_URL...${normal}"
 git clone $REPO_URL > /dev/null || { echo "Failed to clone repository"; exit 1; }
 
 # Navigate into the repository directory
-cd financial-portfolio-backend || { echo "${red} Failed to enter repository directory${normal}"; exit 1; }
+#cd financial-portfolio-backend || { echo "${red} Failed to enter repository directory${normal}"; exit 1; }
 
 # Install, test, and start for financial-portfolio-backend
 echo "⏳ ${bold}Handling financial-portfolio-backend...${normal}"

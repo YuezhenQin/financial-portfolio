@@ -75,8 +75,5 @@ UPDATE userstock
 JOIN stockinfo ON userstock.purchaseDate = stockinfo.infoDate
 SET userstock.purchasePrice = stockinfo.closePrice;
 
--- test
-select purchasePrice from userstock;
-select purchaseDate from userstock;
 
 
