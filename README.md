@@ -1,2 +1,2 @@
-# financial-portfolio
-This is a repo for group project app
+# financial-portfolio v1.0
+This is a repo for neueda training group project app
